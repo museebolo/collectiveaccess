@@ -1,0 +1,68 @@
+version: '2'
+
+services:
+  providence:
+    depends_on:
+      - db
+    image: canelrom1/providence:latest
+    container_name: providence_ca1
+    build:
+      context: ./providence
+    networks:
+      - ca_lan
+    ports:
+      - "8080:80"
+    environment:
+      MYSQL_ADDR: "db"
+      MYSQL_USER: "root"
+      MYSQL_ROOT_PASS: "123456"
+      CA_DB_NAME: "collectiveaccess"
+      CA_DB_USER: "root"
+      CA_DB_PASS: "123456"
+    volumes:
+      - local-ca:/var/www/html
+
+  pawtucket:
+    depends_on:
+      - db
+      - providence
+    image: canelrom1/pawtucket:latest
+    container_name: pawtucket2_ca1
+    build:
+      context: ./pawtucket2
+    networks:
+      - ca_lan
+    ports:
+      - "80:80"
+    environment:
+      MYSQL_ADDR: "db"
+      MYSQL_USER: "root"
+      MYSQL_ROOT_PASS: "123456"
+      CA_DB_NAME: "collectiveaccess"
+      CA_DB_USER: "root"
+      CA_DB_PASS: "123456"
+    volumes:
+      - local-ca:/var/www/html
+
+  db:
+    image: mariadb:latest
+    container_name: database_ca1
+    volumes:
+      - mariadb-ca:/var/lib/mysql
+    networks:
+      - ca_lan
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_DATABASE: ca
+
+volumes:
+  mariadb-ca:
+    driver: local
+  local-ca:
+    driver: local
+
+networks:
+  ca_lan:
+    driver: bridge
+
+# vim: ft=yaml et tw=80 sts=2 sw=2 ts=2
