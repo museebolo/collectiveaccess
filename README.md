@@ -1,5 +1,5 @@
-<font color="red"> ** This repository is in development. ** </font>
-<font color="red"> ** Ce dépôt est en développement. ** </font>
+** This repository is in development. ** <br>
+** Ce dépôt est en développement. **
 
 # Collective Access
 Creds:
