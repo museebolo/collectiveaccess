@@ -36,9 +36,8 @@ RUN apk add alpine-sdk \
  && rm -rf /var/www/html \
  && curl -SsL https://github.com/collectiveaccess/providence/archive/$CA_PROVIDENCE_VERSION.tar.gz | tar -C /var/www/ -xzf - \
  && mv /var/www/providence-$CA_PROVIDENCE_VERSION /var/www/html \
- && cp /var/www/html/setup.php-dist /var/www/html/setup.php
-
-RUN chown -R apache:apache /var/www/html
+ && cp /var/www/html/setup.php-dist /var/www/html/setup.php \
+ && chown -R apache:apache /var/www/html
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod 777 /entrypoint.sh
