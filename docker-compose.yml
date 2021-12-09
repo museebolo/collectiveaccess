@@ -4,7 +4,6 @@ services:
   providence:
     depends_on:
       - db
-    image: canelrom1/providence:latest
     container_name: providence_ca1
     build:
       context: ./providence
@@ -26,7 +25,6 @@ services:
     depends_on:
       - db
       - providence
-    image: canelrom1/pawtucket:latest
     container_name: pawtucket2_ca1
     build:
       context: ./pawtucket2
