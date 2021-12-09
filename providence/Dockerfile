@@ -25,7 +25,7 @@ RUN apk add alpine-sdk \
             php7-xmlreader \
             php7-xmlwriter \
             php7-zip \
-            py2-pip \
+            py3-pip \
             poppler-utils \
  && pip install --upgrade pip \
  && pip install pdfminer \
