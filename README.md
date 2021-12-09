@@ -1,10 +1,13 @@
-** This repository is in development. ** <br>
-** Ce dépôt est en développement. **
-
 # Collective Access
 Creds:
 * administrator
-* 123456
+* changeme
+
+# Installation
+
+* Administrator's e-mail : patrick.hervieux@museebolo.ch
+* Installation profile : Dublin Core
+
 
 ## Todo list
 ☐ Créer un utilisateur collective access. Sécurité<br>
