@@ -1,7 +1,5 @@
 FROM canelrom1/apache2-php7:latest
 
-ENV CA_PROVIDENCE_VERSION=1.7.6
-
 RUN apk add alpine-sdk \
             curl \
             ffmpeg \
@@ -39,6 +37,8 @@ RUN apk add alpine-sdk \
  && cp /var/www/html/setup.php-dist /var/www/html/setup.php \
  && wget -P /var/www/html/install/profiles/xml https://raw.githubusercontent.com/collectiveaccess/providence/develop/install/profiles/xml/dublincore_2014.xml \
  && chown -R apache:apache /var/www/html
+
+ENV CA_PROVIDENCE_VERSION=1.7.6
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod 777 /entrypoint.sh
