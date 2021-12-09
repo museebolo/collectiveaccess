@@ -1,4 +1,4 @@
-FROM canelrom1/apache-php7:latest
+FROM canelrom1/apache2-php7:latest
 
 ENV CA_PROVIDENCE_VERSION=1.7.6
 
