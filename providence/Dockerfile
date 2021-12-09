@@ -37,6 +37,7 @@ RUN apk add alpine-sdk \
  && curl -SsL https://github.com/collectiveaccess/providence/archive/$CA_PROVIDENCE_VERSION.tar.gz | tar -C /var/www/ -xzf - \
  && mv /var/www/providence-$CA_PROVIDENCE_VERSION /var/www/html \
  && cp /var/www/html/setup.php-dist /var/www/html/setup.php \
+ && wget -P /var/www/html/install/profiles/xml https://raw.githubusercontent.com/collectiveaccess/providence/develop/install/profiles/xml/dublincore_2014.xml \
  && chown -R apache:apache /var/www/html
 
 COPY entrypoint.sh /entrypoint.sh
