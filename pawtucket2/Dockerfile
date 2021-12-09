@@ -1,6 +1,4 @@
-FROM canelrom1/apache-php7:latest
-
-ENV CA_PAWTUCKET_VERSION=1.7.6
+FROM canelrom1/apache2-php7:latest
 
 RUN apk add curl \
             mariadb-client \
@@ -17,6 +15,8 @@ RUN apk add curl \
             php7-xmlreader \
             php7-xmlwriter \
             php7-zip
+
+ENV CA_PAWTUCKET_VERSION=1.7.13
 
 RUN rm -rf /var/www/html \
  && curl -SsL https://github.com/collectiveaccess/pawtucket2/archive/$CA_PAWTUCKET_VERSION.tar.gz | tar -C /var/www/ -xzf - \
