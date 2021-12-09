@@ -30,11 +30,10 @@ RUN apk add alpine-sdk \
  && pip install --upgrade pip \
  && pip install pdfminer \
  && cd /tmp \
- && wget http://cybercom.net/~dcoffin/dcraw/dcraw.c \
+ && wget https://www.dechifro.org/dcraw/dcraw.c \
  && gcc -o dcraw -O4 dcraw.c -lm -DNODEPS \
- && mv dcraw /usr/bin
-
-RUN rm -rf /var/www/html \
+ && mv dcraw /usr/bin \
+ && rm -rf /var/www/html \
  && curl -SsL https://github.com/collectiveaccess/providence/archive/$CA_PROVIDENCE_VERSION.tar.gz | tar -C /var/www/ -xzf - \
  && mv /var/www/providence-$CA_PROVIDENCE_VERSION /var/www/html \
  && cp /var/www/html/setup.php-dist /var/www/html/setup.php
