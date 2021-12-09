@@ -43,7 +43,7 @@ services:
       - local-ca:/var/www/html
 
   db:
-    image: mariadb:latest
+    image: mariadb:10.7
     container_name: database_ca1
     volumes:
       - mariadb-ca:/var/lib/mysql
