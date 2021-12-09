@@ -16,7 +16,6 @@ RUN apk add alpine-sdk \
             php7-iconv \
             php7-json \
             php7-mbstring \
-            php7-mcrypt \
             php7-memcached \
             php7-openssl \
             php7-phar \
