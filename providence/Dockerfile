@@ -31,16 +31,17 @@ RUN apk add alpine-sdk \
  && wget https://www.dechifro.org/dcraw/dcraw.c \
  && gcc -o dcraw -O4 dcraw.c -lm -DNODEPS \
  && mv dcraw /usr/bin \
- && rm -rf /var/www/html \
- && curl -SsL https://github.com/collectiveaccess/providence/archive/$CA_PROVIDENCE_VERSION.tar.gz | tar -C /var/www/ -xzf - \
+ && rm -rf /var/www/html
+
+ENV CA_PROVIDENCE_VERSION=1.7.6
+
+RUN curl -SsL https://github.com/collectiveaccess/providence/archive/$CA_PROVIDENCE_VERSION.tar.gz | tar -C /var/www/ -xzf - \
  && mv /var/www/providence-$CA_PROVIDENCE_VERSION /var/www/html \
  && cp /var/www/html/setup.php-dist /var/www/html/setup.php \
  && wget -P /var/www/html/install/profiles/xml https://raw.githubusercontent.com/collectiveaccess/providence/develop/install/profiles/xml/dublincore_2014.xml \
  && sed -i "s/post_max_size.*/post_max_size = 60M/g" /etc/php7/php.ini \
  && sed -i "s/upload_max_filesize.*/upload_max_filesize = 60M/g" /etc/php7/php.ini \
  && chown -R apache:apache /var/www/html
-
-ENV CA_PROVIDENCE_VERSION=1.7.6
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod 777 /entrypoint.sh
