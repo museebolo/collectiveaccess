@@ -36,6 +36,8 @@ RUN apk add alpine-sdk \
  && mv /var/www/providence-$CA_PROVIDENCE_VERSION /var/www/html \
  && cp /var/www/html/setup.php-dist /var/www/html/setup.php \
  && wget -P /var/www/html/install/profiles/xml https://raw.githubusercontent.com/collectiveaccess/providence/develop/install/profiles/xml/dublincore_2014.xml \
+ && sed -i "s/post_max_size.*/post_max_size = 60M/g" /etc/php7/php.ini \
+ && sed -i "s/upload_max_filesize.*/upload_max_filesize = 60M/g" /etc/php7/php.ini \
  && chown -R apache:apache /var/www/html
 
 ENV CA_PROVIDENCE_VERSION=1.7.6
