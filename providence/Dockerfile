@@ -1,4 +1,4 @@
-FROM canelrom1/apache-php7:latest
+FROM canelrom1/apache2-php7:latest
 
 ENV CA_PROVIDENCE_VERSION=1.7.6
 
@@ -16,7 +16,6 @@ RUN apk add alpine-sdk \
             php7-iconv \
             php7-json \
             php7-mbstring \
-            php7-mcrypt \
             php7-memcached \
             php7-openssl \
             php7-phar \
@@ -26,21 +25,19 @@ RUN apk add alpine-sdk \
             php7-xmlreader \
             php7-xmlwriter \
             php7-zip \
-            py2-pip \
+            py3-pip \
             poppler-utils \
  && pip install --upgrade pip \
  && pip install pdfminer \
  && cd /tmp \
- && wget http://cybercom.net/~dcoffin/dcraw/dcraw.c \
+ && wget https://www.dechifro.org/dcraw/dcraw.c \
  && gcc -o dcraw -O4 dcraw.c -lm -DNODEPS \
- && mv dcraw /usr/bin
-
-RUN rm -rf /var/www/html \
+ && mv dcraw /usr/bin \
+ && rm -rf /var/www/html \
  && curl -SsL https://github.com/collectiveaccess/providence/archive/$CA_PROVIDENCE_VERSION.tar.gz | tar -C /var/www/ -xzf - \
  && mv /var/www/providence-$CA_PROVIDENCE_VERSION /var/www/html \
- && cp /var/www/html/setup.php-dist /var/www/html/setup.php
-
-RUN chown -R apache:apache /var/www/html
+ && cp /var/www/html/setup.php-dist /var/www/html/setup.php \
+ && chown -R apache:apache /var/www/html
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod 777 /entrypoint.sh
