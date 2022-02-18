@@ -16,7 +16,7 @@ RUN apk add curl \
             php7-xmlwriter \
             php7-zip
 
-ENV CA_PAWTUCKET_VERSION=1.7.6
+ENV CA_PAWTUCKET_VERSION=1.7.13
 
 RUN rm -rf /var/www/html \
  && curl -SsL https://github.com/collectiveaccess/pawtucket2/archive/$CA_PAWTUCKET_VERSION.tar.gz | tar -C /var/www/ -xzf - \
