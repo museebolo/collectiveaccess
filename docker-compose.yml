@@ -1,9 +1,25 @@
 version: '2'
 
 services:
+  db:
+    image: mariadb:10.7
+    container_name: database_ca1
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb-ca:/var/lib/mysql
+    networks:
+      - ca_lan
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_DATABASE: ca
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u root --password=$$MYSQL_ROOT_PASSWORD
+
   providence:
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     container_name: providence_ca1
     build:
       context: ./providence
@@ -41,18 +57,6 @@ services:
       CA_DB_PASS: "123456"
     volumes:
       - local-ca:/var/www/html
-
-  db:
-    image: mariadb:10.7
-    container_name: database_ca1
-    volumes:
-      - mariadb-ca:/var/lib/mysql
-    networks:
-      - ca_lan
-    environment:
-      MYSQL_ROOT_PASSWORD: "123456"
-      MYSQL_DATABASE: ca
-
 volumes:
   mariadb-ca:
     driver: local

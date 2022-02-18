@@ -32,8 +32,8 @@ RUN apk add alpine-sdk \
  && gcc -o dcraw -O4 dcraw.c -lm -DNODEPS \
  && mv dcraw /usr/bin \
  && rm -rf /var/www/html
-
-ENV CA_PROVIDENCE_VERSION=1.7.6
+ 
+ENV CA_PROVIDENCE_VERSION=1.7.14
 
 RUN curl -SsL https://github.com/collectiveaccess/providence/archive/$CA_PROVIDENCE_VERSION.tar.gz | tar -C /var/www/ -xzf - \
  && mv /var/www/providence-$CA_PROVIDENCE_VERSION /var/www/html \
