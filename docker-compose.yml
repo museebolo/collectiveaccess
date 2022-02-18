@@ -5,7 +5,7 @@ services:
     image: mariadb:10.7
     container_name: database_ca1
     ports:
-      - "3306"
+      - "3306:3306"
     volumes:
       - mariadb-ca:/var/lib/mysql
     networks:
